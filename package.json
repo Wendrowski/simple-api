@@ -6,9 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Wendrowski",
   "license": "ISC",
-  "description": "",
+  "description": "A simple API created with Typescript, NodeJS & Express.js",
   "dependencies": {
     "express": "^4.19.2"
   }
