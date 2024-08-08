@@ -1,26 +1,34 @@
-const express = require('express');
+import express, { Request, Response } from 'express';
+
 const app = express();
 const port = 3000;
 
 app.use(express.json()); // Middleware to parse JSON bodies
 
+// Define the type for an item
+interface Item {
+  id: number;
+  name: string;
+  [key: string]: any; // Allows additional properties
+}
+
 // Simulated in-memory database
-let items = [];
+let items: Item[] = [];
 
 // Create a new item
-app.post('/items', (req, res) => {
-  const item = req.body;
+app.post('/items', (req: Request, res: Response) => {
+  const item: Item = req.body;
   items.push(item);
   res.status(201).send(item);
 });
 
 // Read all items
-app.get('/items', (req, res) => {
+app.get('/items', (req: Request, res: Response) => {
   res.send(items);
 });
 
 // Read a single item by ID
-app.get('/items/:id', (req, res) => {
+app.get('/items/:id', (req: Request, res: Response) => {
   const id = parseInt(req.params.id, 10);
   const item = items.find(i => i.id === id);
   if (item) {
@@ -31,7 +39,7 @@ app.get('/items/:id', (req, res) => {
 });
 
 // Update an item by ID
-app.put('/items/:id', (req, res) => {
+app.put('/items/:id', (req: Request, res: Response) => {
   const id = parseInt(req.params.id, 10);
   const index = items.findIndex(i => i.id === id);
   if (index !== -1) {
@@ -43,7 +51,7 @@ app.put('/items/:id', (req, res) => {
 });
 
 // Delete an item by ID
-app.delete('/items/:id', (req, res) => {
+app.delete('/items/:id', (req: Request, res: Response) => {
   const id = parseInt(req.params.id, 10);
   const index = items.findIndex(i => i.id === id);
   if (index !== -1) {
@@ -55,7 +63,7 @@ app.delete('/items/:id', (req, res) => {
 });
 
 // Initial route
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.send('Hello, World!');
 });
 
